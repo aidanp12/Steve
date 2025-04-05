@@ -70,11 +70,11 @@ class BotMain:
 
         @self.bot.command()
         async def inventory(ctx):
-            await ctx.send(self.users[ctx.author][playerData(view_inventory())])
+            await ctx.send(self.users[ctx.author][playerData.view_inventory()])
 
         @self.bot.command()
-        async def equip(ctx):
-            pass
+        async def equip(ctx, parameter):
+           await ctx.send(self.users[ctx.author][playerData.view_inventory()])
 
     def run(self):
         # Run the bot with the token
