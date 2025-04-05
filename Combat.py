@@ -1,3 +1,6 @@
+from Player import Player
+from Mob import Mob
+
 class Combat:
     def __init__(self, player, mob):
         self.player = player
@@ -38,16 +41,25 @@ class Combat:
 
     def items(self):
         #Access the player's inventory
-        u_input = input("1) Weapon\n2) Armor\n3) Magic\n 4) Items")
+        while True:
+            u_input = input("1) Weapon\n2) Armor\n3) Magic\n 4) Back\n5) Equip\n")
 
-        if u_input == "1" or u_input.lower() == "weapon":
-            
-        print("Used an item\n")
+            if u_input == "1" or u_input.lower() == "weapon":
+                print(f"{self.player.inventory['weapons']}\n")
+
+            elif u_input == "2" or u_input.lower() == "armor":
+                print(f"{self.player.inventory['armors']}\n")
+
+            elif u_input == "3" or u_input.lower() == "magic":
+                print(f"{self.player.inventory['spells']}\n")
+
+            elif u_input == "4" or u_input.lower() == "equip":
+                e_input = input('Equip: ')
+                self.players.equip_weapon(e_input)
+        
+            elif u_input == "5" or u_input.lower() == 'back':
+                break
 
     def run(self):
         #some formula to calculate run
         return True
-    
-def main():
-    instance = Combat('placeholder1', 'placeholder')
-main()
