@@ -18,15 +18,17 @@ class Player:
 
     def equip_weapon(self, weapon):
         """Equip a weapon from the inventory."""
-        if weapon in self.inventory['weapons']:
+        if weapon.lower() in self.inventory['weapons']:
             self.current_weapon = weapon
+            print(f"{weapon} equipped.")
         else:
             return f"{weapon} is not in the inventory."
 
     def equip_armor(self, armor):
         """Equip armor from the inventory."""
-        if armor in self.inventory['armors']:
+        if armor.lower() in self.inventory['armors']:
             self.current_armor = armor
+            print(f"{armor} equipped.")
         else:
            return f"{armor} is not in the inventory."
 
@@ -41,7 +43,7 @@ class Player:
         """Add items to the inventory (weapons, armors, spells)."""
         if item_type not in self.inventory:
             return "Invalid item type. Choose from 'weapons', 'armors', or 'spells'."
-        self.inventory[item_type].append(item)
+        self.inventory[item_type].append(item.lower())
     
     def view_inventory(self):
         print("Weapons:")
