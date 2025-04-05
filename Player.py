@@ -1,24 +1,24 @@
-from magic import magic
+#from magic import magic
 from weapon import Weapon
 
 class Player:
-    def __init__(self, hp, mana):
+    def __init__(self, hp):
         # Basic player attributes
         self.max_hp = hp
         self.cur_hp = hp
-        self.mana = mana
+        #self.mana = mana
 
         # Inventory holds extra items (weapons, armors, spells)
         self.inventory = {
             'weapons': [],
             'armors': [],
-            'spells': []
+            #'spells': []
         }
 
         # Starting equipment (can be modified later)
         self.current_weapon = None
         self.current_armor = None
-        self.current_spell = None
+        #self.current_spell = None
 
     def equip_weapon(self, weapon):
         """Equip a weapon from the inventory."""
@@ -36,13 +36,13 @@ class Player:
         else:
            return f"{armor} is not in the inventory."
 
-    def equip_spell(self, spell):
-        """Learn a spell from the inventory."""
-        if spell in self.inventory['spells']:
-            self.current_spell = spell
-            print(f"{spell} equipped.\n")
-        else:
-            return f"{spell} is not in the inventory."
+    #def equip_spell(self, spell):
+        #"""Learn a spell from the inventory."""
+        #if spell in self.inventory['spells']:
+            #self.current_spell = spell
+            #print(f"{spell} equipped.\n")
+        #else:
+            #return f"{spell} is not in the inventory."
 
     def add_to_inventory(self, item_type, item):
         """Add items to the inventory (weapons, armors, spells)."""
@@ -65,9 +65,9 @@ class Player:
         else:
             print("No armors in inventory.")
         
-        print("Spells:")
-        if self.inventory['spells']:
-            for spell in self.inventory['spells']:
-                print(f"- {spell}")
-        else:
-            print("No spells in inventory.")
+        #print("Spells:")
+        #if self.inventory['spells']:
+            #for spell in self.inventory['spells']:
+                #print(f"- {spell}")
+        #else:
+            #print("No spells in inventory.")
