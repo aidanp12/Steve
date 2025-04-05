@@ -49,44 +49,52 @@ rpg_tool = {
                                 "durability": {"type": "integer"},
                                 "pierce": {"type": "integer"}
                             }
+                        },
+                        "enemy_encounter": {"type": "boolean"},
+                        "enemy": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "name": {"type": "string"},
+                                "type": {"type": "string"},
+                                "level": {"type": "integer"},
+                                "abilities": {
+                                    "type": "array",
+                                    "items": {"type": "string"}
+                                }
+                            }
+                        },
+                        "location_discovery": {"type": "boolean"},
+                        "location": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "name": {"type": "string"},
+                                "description": {"type": "string"},
+                                "features": {
+                                    "type": "array",
+                                    "items": {"type": "string"}
+                                }
+                            }
                         }
-                    }
-                },
-                "enemy_encounter": {"type": "boolean"},
-                "enemy": {
-                    "type": ["object", "null"],
-                    "properties": {
-                        "name": {"type": "string"},
-                        "type": {"type": "string"},
-                        "level": {"type": "integer"},
-                        "abilities": {
-                            "type": "array",
-                            "items": {"type": "string"}
-                        }
-                    }
-                },
-                "location_discovery": {"type": "boolean"},
-                "location": {
-                    "type": ["object", "null"],
-                    "properties": {
-                        "name": {"type": "string"},
-                        "description": {"type": "string"},
-                        "features": {
-                            "type": "array",
-                            "items": {"type": "string"}
-                        }
-                    }
+                    },
+                    "required": [
+                        "item_found",
+                        "item",
+                        "enemy_encounter",
+                        "enemy",
+                        "location_discovery",
+                        "location"
+                    ]
                 }
-            }
+            },
+            "required": ["narrative", "events"]
         }
-    },
-    "required": ["narrative", "events"]
+    }
 }
 
 
 class Narr:
     def __init__(self):
-        self.story_started = False;
+        self.story_started = False
         self.client = OpenAI()
         self.narrator = self.client.beta.assistants.create(
             name="Steve",
@@ -101,8 +109,7 @@ class Narr:
         if not self.story_started:
             self.initiate_story()
         else:
-            self.progress_story(user_response)
-
+            return self.progress_story(user_response)
 
     def initiate_story(self):
         self.story_started = True
@@ -111,7 +118,6 @@ class Narr:
             role="user",
             content="\"ADMIN\"The player begins in a tavern setting. The story is narrated by you, Steve. ",
         )
-
 
     def initiate_encounter(self):
         pass
