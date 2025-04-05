@@ -8,9 +8,10 @@ Contributors:
 """
 
 from openai import OpenAI
-from pydantic import BaseModel
 import json
 import time
+import os
+from dotenv import load_dotenv
 
 STORY_PROMPT = """
 You are a fantasy RPG narrator AI.
@@ -37,14 +38,17 @@ rpg_tool = {
                 "events": {
                     "type": "object",
                     "properties": {
-                        "item_found": {"type": "boolean"},
-                        "item": {
+                        "weapon_found": {"type": "boolean"},
+                        "weapon": {
                             "type": ["object", "null"],
                             "properties": {
                                 "name": {"type": "string"},
                                 "type": {"type": "string"},
                                 "rarity": {"type": "string"},
-                                "damage": {"type": "string"},
+                                "damage": {
+                                    "type": "string",
+                                    "description": "The damage will be in the form of XdY, where X is the number of dice and Y is the number of sides on the dice, chosen from 4, 6, 8, 10, 12, 20, and 100"
+                                },
                                 "damage_type": {"type": "string"},
                                 "durability": {"type": "integer"},
                                 "pierce": {"type": "integer"}
@@ -77,8 +81,8 @@ rpg_tool = {
                         }
                     },
                     "required": [
-                        "item_found",
-                        "item",
+                        "weapon_found",
+                        "weapon",
                         "enemy_encounter",
                         "enemy",
                         "location_discovery",
@@ -94,8 +98,10 @@ rpg_tool = {
 
 class Narr:
     def __init__(self):
+        load_dotenv()
+        _OPENAPI_KEY = os.getenv('OPENAI_KEY')
         self.story_started = False
-        self.client = OpenAI()
+        self.client = OpenAI(api_key=_OPENAPI_KEY)
         self.narrator = self.client.beta.assistants.create(
             name="Steve",
             tools=[rpg_tool],
@@ -152,7 +158,6 @@ class Narr:
                     for tool_call in content.tool_calls:
                         if tool_call.function.name == "process_rpg_event":
                             arguments = tool_call.function.arguments
-                            import json
                             result = json.loads(arguments)
                             results = {"Narrative": result["narrative"], "Events": json.dumps(result["events"])}
                             return results
