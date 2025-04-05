@@ -2,7 +2,7 @@ from magic import magic
 from weapon import Weapon
 
 class Player:
-    def __init__(self, name, hp, mana):
+    def __init__(self, hp, mana):
         # Basic player attributes
         self.max_hp = hp
         self.cur_hp = hp
