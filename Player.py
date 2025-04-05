@@ -1,7 +1,6 @@
 class Player:
     def __init__(self, name, hp, mana):
         # Basic player attributes
-        self.name = name
         self.hp = hp
         self.mana = mana
 
@@ -43,3 +42,25 @@ class Player:
         if item_type not in self.inventory:
             return "Invalid item type. Choose from 'weapons', 'armors', or 'spells'."
         self.inventory[item_type].append(item)
+    
+    def view_inventory(self):
+        print("Weapons:")
+        if self.inventory['weapons']:
+            for weapon in self.inventory['weapons']:
+                print(f"- {weapon}")
+        else:
+            print("No weapons in inventory.")
+
+        print("Armors:")
+        if self.inventory['armors']:
+            for armor in self.inventory['armors']:
+                print(f"- {armor}")
+        else:
+            print("No armors in inventory.")
+        
+        print("Spells:")
+        if self.inventory['spells']:
+            for spell in self.inventory['spells']:
+                print(f"- {spell}")
+        else:
+            print("No spells in inventory.")
