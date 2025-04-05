@@ -11,3 +11,4 @@ from openai import OpenAI
 
 class narr():
     def __init__(self):
+        pass
