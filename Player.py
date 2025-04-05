@@ -5,6 +5,6 @@ class player:
     self.ranged = ranged
     self.weapon = weapon
     self.armor = armor
-    self.health = health
+    self.health = hp
     self.mana = mana
     self.inventory = [[], [], []]
