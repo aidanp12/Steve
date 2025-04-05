@@ -21,12 +21,10 @@ class BotMain:
         self.bot = commands.Bot(command_prefix="!", intents=self.intents)
         load_dotenv()
         self.STEVE_TOKEN = os.getenv('STEVE_TOKEN')
-        self.users = []
-
+        self.users = {}
         self.initialize()
 
     def initialize(self):
-
         # Event when the bot has successfully connected
         @self.bot.event
         async def on_ready():
@@ -53,12 +51,14 @@ class BotMain:
 
         @self.bot.command()
         async def begin(ctx):
+            player_dict = {ctx.author: [Narr(), playerData()]}
+            self.users.update({player_dict})
             if ctx.author in self.users:
                 return
             else:
                 self.users.append(ctx.author)
                 # initate the game
-
+        
         @self.bot.command()
         async def end(ctx):
             if ctx.author in self.users:
@@ -71,7 +71,7 @@ class BotMain:
 
         @self.bot.command()
         async def inventory(ctx):
-            pass
+            await ctx.send(
 
         @self.bot.command()
         async def equip(ctx):
