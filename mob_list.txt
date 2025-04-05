@@ -24,7 +24,7 @@ def generate_mob_prompt():
         "boss": {
             "name": "give a name for a boss fantasy creature",
             "status": "hostile",
-            "health": "200+",
+            "health": "200 - 1000",
             "type": "ground or flying",
             "entry_prompt": "write a short little entry message for when the creature enters, like it's talking to the player. This creature is a boss, it should be scary."
         }
