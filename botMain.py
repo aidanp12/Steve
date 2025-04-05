@@ -70,7 +70,7 @@ class BotMain:
 
         @self.bot.command()
         async def inventory(ctx):
-            await ctx.send(
+            await ctx.send(self.users[ctx.author][playerData(view_inventory())])
 
         @self.bot.command()
         async def equip(ctx):
