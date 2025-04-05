@@ -43,7 +43,7 @@ class Combat:
     def items(self):
         #Access the player's inventory
         while True:
-            u_input = input("1) Weapon\n2) Armor\n3) Magic\n 4) Back\n5) Equip\n")
+            u_input = input("1) Weapon\n2) Armor\n3) Magic\n 4) Equip\n5) Back\n")
 
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
