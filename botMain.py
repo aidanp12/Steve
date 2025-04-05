@@ -1,5 +1,5 @@
 """
-Purpose:
+Purpose: run the bot
 Input:
 Output:
 Created: 04/05/2025
