@@ -1,3 +1,6 @@
+from magic import magic
+from weapon import Weapon
+
 class Player:
     def __init__(self, name, hp, mana):
         # Basic player attributes
