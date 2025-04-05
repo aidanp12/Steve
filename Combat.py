@@ -1,5 +1,6 @@
 from Player import Player
 from Mob import Mob
+import random
 
 class Combat:
     def __init__(self, player, mob):
@@ -9,8 +10,8 @@ class Combat:
         self.menu()
     
     def menu(self):
-        print(f"{self.mob}: {self.mob.hp}\n")
-        print(f"Player HP: {self.player.hp}    Player MP: {self.player.mana}\n\n")
+        print(f"{self.mob}: {self.mob.cur_hp}/{self.mob.max_hp}\n")
+        print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}    Player MP: {self.player.mana}\n\n")
         
         while True:
             u_input = input("Options:\n1) Attack\n2) Items\n3) Run\n")
@@ -61,5 +62,5 @@ class Combat:
                 break
 
     def run(self):
-        #some formula to calculate run
-        return True
+        run_chance = .5 #50% chance
+        return random.random() < run_chance
