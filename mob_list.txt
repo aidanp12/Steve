@@ -1,0 +1,13 @@
+Ender_Dragon = {
+  status: hostile
+  health: 200
+  type: flying
+  entry_prompt: give a prompt message for the finaly boss of the game, a black dragon called the ender dragon, make it sound like a evil dragon who's angry at the player for bothering them and then says something about how it's going to kill you
+}
+
+Bandit = {
+  status: hostile
+  health: 20
+  type: ground
+  entry_prompt: give a prompt message for a bandit who's about to try to kill/rob the main player
+}
