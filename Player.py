@@ -4,7 +4,8 @@ from weapon import Weapon
 class Player:
     def __init__(self, name, hp, mana):
         # Basic player attributes
-        self.hp = hp
+        self.max_hp = hp
+        self.cur_hp = hp
         self.mana = mana
 
         # Inventory holds extra items (weapons, armors, spells)
