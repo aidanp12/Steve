@@ -20,7 +20,7 @@ class Player:
         """Equip a weapon from the inventory."""
         if weapon.lower() in self.inventory['weapons']:
             self.current_weapon = weapon
-            print(f"{weapon} equipped.")
+            print(f"{weapon} equipped.\n")
         else:
             return f"{weapon} is not in the inventory."
 
@@ -28,7 +28,7 @@ class Player:
         """Equip armor from the inventory."""
         if armor.lower() in self.inventory['armors']:
             self.current_armor = armor
-            print(f"{armor} equipped.")
+            print(f"{armor} equipped.\n")
         else:
            return f"{armor} is not in the inventory."
 
@@ -36,6 +36,7 @@ class Player:
         """Learn a spell from the inventory."""
         if spell in self.inventory['spells']:
             self.current_spell = spell
+            print(f"{spell} equipped.\n")
         else:
             return f"{spell} is not in the inventory."
 
