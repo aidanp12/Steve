@@ -51,12 +51,11 @@ class BotMain:
 
         @self.bot.command()
         async def begin(ctx):
-            player_dict = {ctx.author: [Narr(), playerData()]}
-            self.users.update({player_dict})
             if ctx.author in self.users:
                 return
             else:
-                self.users.append(ctx.author)
+                player_dict = {ctx.author: [Narr(), playerData()]}
+                self.users.update({player_dict})
                 # initate the game
         
         @self.bot.command()
