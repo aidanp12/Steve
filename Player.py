@@ -7,4 +7,4 @@ class player:
     self.armor = armor
     self.health = health
     self.mana = mana
-    self.inventory = []
+    self.inventory = [[], [], []]
