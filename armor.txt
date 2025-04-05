@@ -1,5 +1,0 @@
-Helmet
-Chestplate
-Leggings
-Boots
-Gauntlets
