@@ -1,4 +1,4 @@
-class player
+class player:
   def __init__(magic, melee, ranged, weapon, armor, health, mana):
     self.magic = magic
     self.melee = melee
