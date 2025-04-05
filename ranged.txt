@@ -1,0 +1,7 @@
+Shortbow
+Longbow
+Recurve
+Crossbow
+Javelin
+Sling
+Throwing Knives
