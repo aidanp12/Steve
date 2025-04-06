@@ -12,13 +12,13 @@ class Player:
             'items': [],
         }
 
-    def equip_weapon(self, weapon):
+    def equip_weapon(self, weapon_name):
         """Equip a weapon from the inventory."""
-        if weapon.lower() in self.inventory['weapons']:
-            self.current_weapon = weapon
-            print(f"{weapon} equipped.\n")
+        if weapon_name.lower() in self.inventory['weapons']:
+            self.current_weapon = weapon_name
+            print(f"{weapon_name} equipped.\n")
         else:
-            print(f"{weapon} is not in the inventory.")
+            print(f"{weapon_name} is not in the inventory.")
 
     def unequip_weapon(self):
         """unequip a weapon from the inventory."""
