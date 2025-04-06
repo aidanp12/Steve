@@ -24,9 +24,9 @@ class Player:
         """unequip a weapon from the inventory."""
         if self.current_weapon != None:
             self.current_weapon = None
-            return "Weapon unequipped."
+            print("Weapon unequipped.")
         else:
-            return "No weapon to unequip."
+            print("No weapon to unequip.")
 
 
     def add_to_inventory(self, item_type, item_name):
