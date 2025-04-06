@@ -37,11 +37,16 @@ class Player:
             self.inventory['weapons'].append(new_weapon)
 
      def remove_from_inventory(self, item_type, item_name):
-            self.inventory[item_type].remove(item_name)
-            print(f"{item_name} has been removed from your inventory.")
-            if item_type == 'weapons' and self.current_weapon == item_name:
+         item_name = item_name.lower()
+         for item in self.inventory[item_type]:
+             if item_name = item.name.lower():
+                 self.inventory[item_type].remove(item)
+                 print(f"{item_name} has been removed from your inventory.")
+            if item_type == 'weapons' and self.current_weapon == item.name.lower():
                 self.current_weapon = None
                 print(f"{item_name.name} has also been unequipped.")
+        else:
+            print(f"{item_name} not found in inventory.")
 
     def view_inventory(self):
         print("Items:")
