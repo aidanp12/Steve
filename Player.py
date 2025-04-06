@@ -48,7 +48,7 @@ class Player:
     def add_to_inventory(self, item_type, item):
         """Add items to the inventory (weapons, armors)."""
         if item_type not in self.inventory:
-            return "Invalid item type. Choose from 'weapons', 'armors', or 'spells'."
+            return "Invalid item type. Choose from 'weapons', or 'items'."
         self.inventory[item_type].append(item.lower())
 
      def remove_from_inventory(self, item_type, item):
