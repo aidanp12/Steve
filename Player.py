@@ -21,7 +21,6 @@ class Player:
             print(f"{weapon_name} is not in the inventory.")
 
     def unequip_weapon(self):
-        """unequip a weapon from the inventory."""
         if self.current_weapon != None:
             self.current_weapon = None
             print("Weapon unequipped.")
