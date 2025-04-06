@@ -1,5 +1,5 @@
 from Player import Player
-from Mob import Mob
+from random_enemy import enemyStats
 import random
 
 class Combat:
