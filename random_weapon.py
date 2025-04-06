@@ -1,4 +1,4 @@
-from roll import rollDice
+from roll import diceRoll
 
 class weaponStats:
   def createStats():
