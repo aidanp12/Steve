@@ -38,12 +38,32 @@ class BotMain:
         async def on_message(message):
             if message.author == self.bot.user:
                 return
+
             if message.content.lower() == 'this':
                 await message.channel.send('is a CRAFTING table')
+
             elif message.content[0] != '!' and message.author in self.player_dict:
-                await message.channel.send(f"{self.player_dict.get(message.author)[0].progress_story(message.content)}".format(player=message.author.display_name))
+                try:
+                    narrator = self.player_dict[message.author][0]
+                    response = narrator.progress_story(message.content)
+
+                    # If the result is a list, join it
+                    if isinstance(response, list):
+                        response = "\n".join(response)
+
+                    # Replace {player} placeholder with author's display name
+                    if isinstance(response, str):
+                        response = response.replace("{player}", message.author.display_name)
+
+                    await message.channel.send(response)
+
+                except Exception as e:
+                    await message.channel.send("If you're seeing this blame Aidan.")
+                    print(f"[ERROR] on_message: {e}")
+
             elif message.content[0] != '!':
                 await message.channel.send("water bucket... RELEASE!!")
+
             await self.bot.process_commands(message)
 
         # Command example: !hello
