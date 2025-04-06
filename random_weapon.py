@@ -8,8 +8,9 @@ class weaponStats:
     self.dur = 0
     self.pierce = 0
     self.level = level
+    self.createStats()
   
-  def createStats():
+  def createStats(self):
     stat_list = []
     list1 = [1, 2]
     sides = [4, 6, 8, 10, 12, 20]
