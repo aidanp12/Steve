@@ -21,8 +21,7 @@ class Combat:
 
     def encounter(self, u_input):
         if u_input == "1" or u_input.lower() == "attack":
-            a_input = input(f"1) {self.player.magic}    2) {self.weapon}")
-            self.attack(a_input)
+            self.attack()
             self.menu()
 
         elif u_input == "2" or u_input.lower() == "items":
@@ -36,14 +35,14 @@ class Combat:
                 print("Couldn't escape!")
                 self.menu()
     
-    def attack(self, input):
+    def attack(self):
         '''Accesses player class for weapon and magic, accessing the respective classes for both'''
         print('Attack dealt\n')
 
     def items(self):
         #Access the player's inventory
         while True:
-            u_input = input("1) Weapon\n2) Armor\n3) Magic\n 4) Equip\n5) Back\n")
+            u_input = input("1) Weapon\n2) Armor\n3) Equip\n4) Back\n")
 
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
@@ -51,14 +50,14 @@ class Combat:
             elif u_input == "2" or u_input.lower() == "armor":
                 print(f"{self.player.inventory['armors']}\n")
 
-            elif u_input == "3" or u_input.lower() == "magic":
-                print(f"{self.player.inventory['spells']}\n")
+            #elif u_input == "3" or u_input.lower() == "magic":
+                #print(f"{self.player.inventory['spells']}\n")
 
-            elif u_input == "4" or u_input.lower() == "equip":
+            elif u_input == "3" or u_input.lower() == "equip":
                 e_input = input('Equip: ')
                 self.players.equip_weapon(e_input)
         
-            elif u_input == "5" or u_input.lower() == 'back':
+            elif u_input == "4" or u_input.lower() == 'back':
                 break
 
     def run(self):
