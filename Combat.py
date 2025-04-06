@@ -29,8 +29,9 @@ class Combat:
         if u_input == "1" or u_input.lower() == "attack":
             if not self.player.current_weapon:
                 print("You have no weapon equipped!")
+                self.menu
                 return
-            
+        
             print(f"Equipped Weapon: {self.player.current_weapon.name if self.player.current_weapon else 'None'}")
             self.attack()
 
@@ -70,6 +71,7 @@ class Combat:
 
                     if self.player_weapon.dur == 0:
                         print(f"{self.player.current_weapon.name} has broken!")
+                        self.player.remove_from_inventory('weapons', player.current_weapon)
                         
                     if not any(enemy.alive for enemy in self.enemies):
                         self.victory = True
@@ -81,6 +83,18 @@ class Combat:
 
             except ValueError:
                 print("Please enter a valid input")
+    
+    def mob_attack(self): #damage dealt by the mobs 1by1 through the list of them
+        living_enemies = [e for e in self.enemies if e.alive]
+        for enemy in living_enemies:
+        dmg = enemy.dmg
+        print(f"{enemy.name} attacks you for {dmg} damage!")
+        self.player.take_dmg(dmg)
+
+        if self.player.cur_hp <= 0:
+            print("You were defeated!")
+            self.victory = False
+            return
 
     def items(self):
         #Access the player's inventory
