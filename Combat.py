@@ -16,12 +16,14 @@ class Combat:
         for enemy in self.enemies:
             if enemy.alive:
                 print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}\n")
-                counter += 1
-
-        print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}    Player MP: {self.player.mana}\n\n")
+        
         if ambush == true and ambushdone == false:
             mob_attack()
-            
+            ambushdone = True counter += 1
+
+        print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}    Player MP: {self.player.mana}\n\n")
+        
+        
         while True:
             u_input = input("Options:\n1) Attack\n2) Items\n3) Run\n")
             if u_input in self.valid_inputs:
@@ -96,6 +98,7 @@ class Combat:
 
         if self.player.cur_hp <= 0:
             self.victory = False
+            print("You Died T_T")
             return
 
     def items(self):
