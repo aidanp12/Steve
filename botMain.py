@@ -65,10 +65,6 @@ class BotMain:
                 pass
 
         @self.bot.command()
-        async def quest(ctx):
-            pass
-
-        @self.bot.command()
         async def inventory(ctx):
             await ctx.send(player.view_inventory())
 
