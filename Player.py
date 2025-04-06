@@ -11,13 +11,14 @@ class Player:
         # Inventory holds extra items (weapons, armors, spells)
         self.inventory = {
             'weapons': [],
-            'armors': []
+            'items': [],
+            #'armors': []
             #'spells': []
         }
 
         # Starting equipment (can be modified later)
         self.current_weapon = None
-        self.current_armor = None
+        #self.current_armor = None
         #self.current_spell = None
 
     def equip_weapon(self, weapon):
@@ -28,13 +29,13 @@ class Player:
         else:
             return f"{weapon} is not in the inventory."
 
-    def equip_armor(self, armor):
-        """Equip armor from the inventory."""
-        if armor.lower() in self.inventory['armors']:
-            self.current_armor = armor
-            print(f"{armor} equipped.\n")
-        else:
-           return f"{armor} is not in the inventory."
+    #def equip_armor(self, armor):
+        #"""Equip armor from the inventory."""
+        #if armor.lower() in self.inventory['armors']:
+            #self.current_armor = armor
+            #print(f"{armor} equipped.\n")
+        #else:
+           #return f"{armor} is not in the inventory."
 
     #def equip_spell(self, spell):
         #"""Learn a spell from the inventory."""
@@ -63,14 +64,21 @@ class Player:
                 self.current_weapon = None
                 print(f"{item.name} has also been unequipped.")
             
-            elif item_type == 'armors' and self.current_armor == item:
-                self.current_armor = None
-                print(f"{item.name} has also been unquipped.")
+           #elif item_type == 'armors' and self.current_armor == item:
+                #self.current_armor = None
+                #print(f"{item.name} has also been unquipped.")
                 
         except ValueError:
             print(f"{item.name} is not in your inventory.")
             
     def view_inventory(self):
+        print("Items:")
+        if self.inventory['items']:
+            for items in self.inventory['items']:
+                print(f"- {items}")
+        else:
+            print("No items in inventory.")
+            
         print("Weapons:")
         if self.inventory['weapons']:
             for weapon in self.inventory['weapons']:
@@ -78,12 +86,12 @@ class Player:
         else:
             print("No weapons in inventory.")
 
-        print("Armors:")
-        if self.inventory['armors']:
-            for armor in self.inventory['armors']:
-                print(f"- {armor}")
-        else:
-            print("No armors in inventory.")
+        #rint("Armors:")
+        #if self.inventory['armors']:
+            #for armor in self.inventory['armors']:
+                #print(f"- {armor}")
+        #else:
+            #print("No armors in inventory.")
         
         #print("Spells:")
         #if self.inventory['spells']:
