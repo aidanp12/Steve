@@ -7,7 +7,7 @@ class Player:
         self.max_hp = hp
         self.cur_hp = hp
         #self.mana = mana
-
+        
         # Inventory holds extra items (weapons, armors, spells)
         self.inventory = {
             'weapons': [],
@@ -91,3 +91,6 @@ class Player:
                 #print(f"- {spell}")
         #else:
             #print("No spells in inventory.")
+
+    def take_dmg(self, dmg):
+        self.cur_hp -= dmg:
