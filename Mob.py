@@ -11,3 +11,4 @@ class Mob:
         self.cur_hp -= dmg:
         if self.cur_hp <= 0:
             self.alive = False
+            print(f"{self.name} died!\n")
