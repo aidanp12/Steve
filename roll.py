@@ -1,6 +1,6 @@
 import random
 
-def roll(input):
+def diceRoll(input):
     input = input.lower().split("d")
     rolls = int(input[0])
     dice = int(input[1])
