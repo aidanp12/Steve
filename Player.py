@@ -1,5 +1,3 @@
-#from magic import magic
-from weapon import Weapon
 from random_weapon import weaponStats
 
 class Player:
