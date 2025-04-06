@@ -12,6 +12,7 @@ import json
 import time
 import os
 from dotenv import load_dotenv
+from Player import Player
 
 STORY_PROMPT = """
 You are a fantasy RPG narrator AI.
@@ -122,7 +123,7 @@ class Narr:
         begin = self.client.beta.threads.messages.create(
             thread_id=self.storyThread.id,
             role="user",
-            content="\"ADMIN\"The player begins in a tavern setting. The story is narrated by you, Steve. ",
+            content="\"ADMIN\"The player begins in a tavern setting. The story is narrated by you, Steve. Generate a fantasy story with an end goal in mind.",
         )
 
     def initiate_encounter(self):
