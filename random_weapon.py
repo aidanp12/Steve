@@ -1,4 +1,5 @@
 from roll import rollDice
+
 class weaponStats:
   def createStats:
     stat_list = []
@@ -14,4 +15,4 @@ class weaponStats:
     stat_list.append(rarity)
     stat_list.append(dur)
     stat_list.append(pierce)
-  return stat_list
+    return stat_list
