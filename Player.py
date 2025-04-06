@@ -12,10 +12,17 @@ class Player:
 
     def equip_weapon(self, weapon_name):
         """Equip a weapon from the inventory."""
-        if weapon_name.lower() in self.inventory['weapons']:
-            self.current_weapon = weapon_name
-            print(f"{weapon_name} equipped.\n")
-        else:
+        #if weapon_name.lower() in self.inventory['weapons']:
+            #self.current_weapon = weapon_name
+            #print(f"{weapon_name} equipped.\n")
+        #else:
+            #print(f"{weapon_name} is not in the inventory.")
+
+        for weapon in self.inventory['weapons']:
+            if weapon.name.lower() == weapon_name:
+                self.current_weapon = weapon
+                print(f"{weapon.name} equipped.\n")
+                return
             print(f"{weapon_name} is not in the inventory.")
 
     def unequip_weapon(self):
@@ -34,17 +41,34 @@ class Player:
             self.inventory['weapons'].append(new_weapon)
 
     def remove_from_inventory(self, item_type, item_name):
-         item_name = item_name.lower()
-         for item in self.inventory[item_type]:
-            if item_name == item_name.lower():
-                 self.inventory[item_type].remove(item)
-                 print(f"{item_name} has been removed from your inventory.")
-            if item_type == 'weapons' and self.current_weapon == item.name.lower():
-                self.current_weapon = None
-                print(f"{item_name.name} has also been unequipped.")
-            else:
-                print(f"{item_name} not found in inventory.")
+         #item_name = item_name.lower()
+         #for item in self.inventory[item_type]:
+            #if item_name == item_name.lower():
+                 #self.inventory[item_type].remove(item)
+                 #print(f"{item_name} has been removed from your inventory.")
+            #if item_type == 'weapons' and self.current_weapon == item.name.lower():
+                #self.current_weapon = None
+                #print(f"{item_name.name} has also been unequipped.")
+            #else:
+                #print(f"{item_name} not found in inventory.")
+        item_name = item_name.lower()
+        for item in self.inventory[item_type]:
+        # Check for weapon type (weaponStats object)
+            if item_type == 'weapons' and hasattr(item, 'name') and item.name.lower() == item_name:
+                self.inventory[item_type].remove(item)
+                print(f"{item.name} has been removed from your inventory.")
+                if self.current_weapon and self.current_weapon.name.lower() == item_name:
+                    self.current_weapon = None
+                    print(f"{item.name} has also been unequipped.")
+                return
 
+        # Check for regular item (string)
+            elif item_type == 'items' and isinstance(item, str) and item.lower() == item_name:
+                self.inventory[item_type].remove(item)
+                print(f"{item} has been removed from your inventory.")
+                return
+
+        print(f"{item_name} not found in inventory.")
     def view_inventory(self):
         print("Items:")
         if self.inventory['items']:
