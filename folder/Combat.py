@@ -16,16 +16,16 @@ class Combat:
         self.menu()
         
     def menu(self):
+        if not self.ambushdone and any(mob.ambush for mob in self.enemies):
+            print("Ambush! Enemies attack first!")
+            self.mob_attack()
+            self.ambushdone = True
+
         counter = 1
         for enemy in self.enemies:
             if enemy.alive:
                 print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}\n")
                 counter += 1
-
-        if not self.ambushdone and any(mob.ambush for mob in self.enemies):
-            print("Ambush! Enemies attack first!")
-            self.mob_attack()
-            self.ambushdone = True
 
         print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}")
         
@@ -191,6 +191,7 @@ class Combat:
                 print(f"{self.player.current_armor.name} has broken!")
                 self.player.remove_from_inventory('armors', self.player.current_armor)
                 self.player.current_armor = None
+        print(f"Damage was reduced by {absorbed} becuase of your armor!")
         return(reduced_dmg)
     
     def run(self):
