@@ -20,11 +20,11 @@ class weaponStats:
       temp1 = random.randint(list1[random.randint[1, 2]], tempRand)
       temp2 = random.randint(sides[random.randint[1, 6]], tempRand)
       if num == 1:
-        dmg = (temp2 - temp1)*level
+        dmg = (temp2 - temp1)*self.level
       elif num == 2:
-        dur = (temp2 - temp1)*level
+        dur = (temp2 - temp1)*self.level
       elif num == 3:
-        pierce = (temp2 - (2*temp1))*level
+        pierce = (temp2 - (2*temp1))*self.level
     self.dmg = dmg
     self.dur = dur
     self.pierce = pierce
