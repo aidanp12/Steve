@@ -28,11 +28,11 @@ class Player:
             print("No weapon to unequip.")
 
 
-    def add_to_inventory(self, item_type, item_name):
+    def add_to_inventory(self, item_type, item_name, item_level=0):
         if (item_type == 'items'):
             self.inventory['items'].append(item_name.lower())
         else:
-            new_weapon = weaponStats(item_name.lower())
+            new_weapon = weaponStats(item_name.lower(), item_level)
             self.inventory['weapons'].append(new_weapon)
 
     def remove_from_inventory(self, item_type, item_name):

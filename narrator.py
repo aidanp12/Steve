@@ -21,8 +21,8 @@ Avoid explicit content or activities as needed.
 Every time the player's name would be mentioned, replace it with {player}.
 
 For each response to a player message, include in the first line:
-1. weapon_found:"weapon_name" if the player found a weapon
-2. enemy_encounter:"enemy_type" if the player encountered an enemy
+1. weapon_found:"weapon_name":X if the player found a weapon, where X represents the item's level (at least 1, higher levels = better weapons)
+2. enemy_encounter:"enemy_type":X if the player encountered an enemy, where X represents the item's level (at least 1, higher levels indicate stronger enemies))
 3. item_found:"item_name" if the player found an item
 4. story if none of the above are applicable 
 
@@ -92,11 +92,12 @@ class Narr:
             if message.role == "assistant":
                 for content in message.content:
                     if content.type == "text":
+                        print(content.text.value)
                         return self._parse_output(content.text.value)
 
         return "The story continues, but nothing of note happened."
 
-    def initiate_encounter(self, enemy_name):
+    def initiate_encounter(self, enemy_name, enemy_level):
         # call max combat stuff here(enemy_name)
         pass
 
@@ -112,17 +113,17 @@ class Narr:
         if "weapon_found" in event_line:
             weapon_data = split_string[0].split(':')
             bottom_bar = ("═╬" * 5) + "═"
-            self.player_data.add_to_inventory("weapon", weapon_data[1])
+            self.player_data.add_to_inventory("weapon", weapon_data[1], weapon_data[2])
 
         elif "item_found" in event_line:
             item_data = split_string[0].split(':')
             bottom_bar = ("─┼" * 5) + "─"
-            self.player_data.add_to_inventory("weapon", item_data[1])
+            self.player_data.add_to_inventory("item", item_data[1])
 
 
         elif "enemy_encounter" in event_line:
             enemy_encounter = split_string[0].split(':')
-            self.initiate_encounter(enemy_encounter[1])
+            self.initiate_encounter(enemy_encounter[1], enemy_encounter[2])
             bottom_bar = ("╧╤" * 5) + "╧"
 
         elif "story" in event_line:
