@@ -39,7 +39,6 @@ class Player:
      def remove_from_inventory(self, item_type, item_name):
             self.inventory[item_type].remove(item_name)
             print(f"{item_name.name} has been removed from your inventory.")
-
             if item_type == 'weapons' and self.current_weapon == item_name:
                 self.current_weapon = None
                 print(f"{item_name.name} has also been unequipped.")
