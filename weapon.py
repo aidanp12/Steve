@@ -1,8 +1,7 @@
 class Weapon:
-    def __init__(self, ranged, dmg_type, dmg, enchanted, dur, pierce):
-        self.ranged = ranged
+    def __init__(self, dmg_type, dmg, rarity, dur, pierce):
         self.dmg_type = dmg_type
         self.dmg = dmg
-        self.enchanted = enchanted
+        self.rarity = rarity
         self.dur = dur
         self.pierce = pierce
