@@ -93,12 +93,21 @@ class BotMain:
 
         @self.bot.command()
         async def inventory(ctx):
-            await ctx.send(self.users[ctx.author][self.player_dict.view_inventory()])
-
+            if ctx.author in self.player_dict:
+                player = self.player_dict[ctx.author][1]
+                await ctx.send(player.view_inventory())
+            else:
+                await ctx.send("You haven't started your adventure yet. Use `!begin` first.")
+                
         @self.bot.command()
         async def equip(ctx, parameter):
-            await ctx.send(self.users[ctx.author][self.player_dict.equip_weapon(parameter)])
-
+            if ctx.author in self.player_dict:
+                player = self.player_dict[ctx.author][1]
+                response = player.equip_weapon(weapon_name)
+                await ctx.send(response)
+            else:
+                await ctx.send("You haven't started your adventure yet. Use `!begin` first.")
+                
     def run(self):
         # Run the bot with the token
 
