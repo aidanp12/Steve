@@ -40,9 +40,9 @@ class BotMain:
                 return
             if message.content.lower() == 'this':
                 await message.channel.send('is a CRAFTING table')
-            elif message.content.lower()[0] != '!' and message.author in self.player_dict:
-                await message.channel.send(self.player_dict.get(message.author).progress_story(message.content))
-            else:
+            elif message.content[0] != '!' and message.author in self.player_dict:
+                await message.channel.send(f"{self.player_dict.get(message.author)[0].progress_story(message.content)}".format(player=message.author.display_name))
+            elif message.content[0] != '!':
                 await message.channel.send("water bucket... RELEASE!!")
             await self.bot.process_commands(message)
 
@@ -61,7 +61,8 @@ class BotMain:
                 return
             else:
                 self.player_dict = {ctx.author: [Narr(), Player()]}
-                self.users.update({self.player_dict})
+                self.player_dict.get(ctx.author)[0].initiate_story()
+                await ctx.send("Your adventure has begun!")
                 # initate the game
 
         @self.bot.command()
@@ -76,7 +77,7 @@ class BotMain:
 
         @self.bot.command()
         async def equip(ctx, parameter):
-            await ctx.send(self.users[ctx.author][player().equip_weapon(parameter)]
+            await ctx.send(self.users[ctx.author][Player().equip_weapon(parameter)])
 
     def run(self):
         # Run the bot with the token

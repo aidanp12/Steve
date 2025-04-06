@@ -2,7 +2,7 @@
 from weapon import Weapon
 
 class Player:
-    def __init__(self, hp):
+    def __init__(self, hp=10):
         # Basic player attributes
         self.max_hp = hp
         self.cur_hp = hp
