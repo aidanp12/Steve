@@ -111,6 +111,9 @@ class Combat:
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
 
+            elif u_input == "2" or u_input.lower() == "items":
+                print(f"{self.player.inventory['items']}\n")
+                
             elif u_input == "2" or u_input.lower() == "equip":
                 e_input = input('Equip: ')
                 self.player.equip_weapon(e_input.lower())
