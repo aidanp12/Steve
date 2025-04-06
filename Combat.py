@@ -106,7 +106,7 @@ class Combat:
     def items(self):
         '''Accesses the player's inventory during combat encounter'''
         while True:
-            u_input = input("\n1) Weapon\n2) Equip\n3) Back\n")
+            u_input = input("\n1) Weapon\n2) Items\n3) Equip\n4) Back\n")
 
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
@@ -114,11 +114,11 @@ class Combat:
             elif u_input == "2" or u_input.lower() == "items":
                 print(f"{self.player.inventory['items']}\n")
                 
-            elif u_input == "2" or u_input.lower() == "equip":
+            elif u_input == "3" or u_input.lower() == "equip":
                 e_input = input('Equip: ')
                 self.player.equip_weapon(e_input.lower())
         
-            elif u_input == "3" or u_input.lower() == 'back':
+            elif u_input == "4" or u_input.lower() == 'back':
                 break
 
     def attack_modifier(self, base_dmg):
