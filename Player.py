@@ -32,20 +32,20 @@ class Player:
         if (item_type == 'items'):
             self.inventory['items'].append(item_name.lower())
         else:
-            new_weapon = Weapon(item_name.lower(), weaponStats[0], weaponStats[1], weaponStats[2], weaponStats[3], weaponStats[4], weaponStats[5])
+            new_weapon = weaponStats(item_name.lower())
             self.inventory['weapons'].append(new_weapon)
 
-     def remove_from_inventory(self, item_type, item_name):
+    def remove_from_inventory(self, item_type, item_name):
          item_name = item_name.lower()
          for item in self.inventory[item_type]:
-             if item_name = item.name.lower():
+            if item_name == item_name.lower():
                  self.inventory[item_type].remove(item)
                  print(f"{item_name} has been removed from your inventory.")
             if item_type == 'weapons' and self.current_weapon == item.name.lower():
                 self.current_weapon = None
                 print(f"{item_name.name} has also been unequipped.")
-        else:
-            print(f"{item_name} not found in inventory.")
+            else:
+                print(f"{item_name} not found in inventory.")
 
     def view_inventory(self):
         print("Items:")
@@ -63,4 +63,4 @@ class Player:
             print("No weapons in inventory.")
 
     def take_dmg(self, dmg):
-        self.cur_hp -= dmg:
+        self.cur_hp -= dmg
