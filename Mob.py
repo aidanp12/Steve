@@ -9,5 +9,5 @@ class Mob:
         
     def take_dmg(self, dmg):
         self.cur_hp -= dmg:
-        if self.cur_hp < 0:
+        if self.cur_hp <= 0:
             self.alive = False
