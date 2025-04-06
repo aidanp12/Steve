@@ -61,7 +61,7 @@ class BotMain:
                 return
             else:
                 self.player_dict = {ctx.author: [Narr(), Player()]}
-                self.player_dict.get(ctx.author)[0].initiate_story()
+                self.player_dict.get(ctx.author)[0].initiate_story(self.player_dict.get(ctx.author)[1])
                 await ctx.send("Your adventure has begun!")
                 # initate the game
 
