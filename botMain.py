@@ -41,7 +41,7 @@ class BotMain:
             if message.content.lower() == 'this':
                 await message.channel.send('is a CRAFTING table')
             elif message.content.lower()[0] != '!' and message.author in self.player_dict:
-                self.player_dict.get(message.author).progress_story(message.content)
+                await message.channel.send(self.player_dict.get(message.author).progress_story(message.content))
             else:
                 await message.channel.send("water bucket... RELEASE!!")
             await self.bot.process_commands(message)
@@ -61,7 +61,7 @@ class BotMain:
                 return
             else:
                 self.player_dict = {ctx.author: [Narr(), Player()]}
-                # self.users.update({self.player_dict})
+                self.users.update({self.player_dict})
                 # initate the game
 
         @self.bot.command()
