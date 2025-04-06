@@ -17,8 +17,9 @@ class Combat:
             if enemy.alive:
                 print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}\n")
                 counter += 1
-                
-        if self.ambush == True and self.ambushdone == Talse:
+
+        if not self.ambushdone and any(mob.ambush for mob in self.enemies):
+            print("Ambush! Enemies attack first!")
             mob_attack()
             self.ambushdone = True
 
@@ -40,7 +41,7 @@ class Combat:
             print(f"Equipped Weapon: {self.player.current_weapon.name if self.player.current_weapon else 'None'}")
             self.attack()
 
-            if self.victory():
+            if self.victory:
                 print("Combat ended.")
             else:
                 self.menu()
@@ -70,7 +71,7 @@ class Combat:
                 if 0 <= choice < len(living_enemies):
                     target = living_enemies[choice]
                     dmg = self.player.current_weapon.dmg + self.player.current_weapon.pierce
-                    f_dmg = dmg_modifier(dmg)
+                    f_dmg = self.dmg_modifier(dmg)
                     
                     if f_dmg > dmg:
                         print(f"Critical Success! You deal an extra {f_dmg-dmg} damage!\n")
@@ -83,7 +84,8 @@ class Combat:
 
                     if self.player.current_weapon.dur == 0:
                         print(f"{self.player.current_weapon.name} has broken!")
-                        self.player.remove_from_inventory('weapons', player.current_weapon)
+                        self.player.remove_from_inventory('weapons', self.player.current_weapon)
+                        self.player.current_weapon = None
                         
                     if not any(enemy.alive for enemy in self.enemies):
                         self.victory = True
@@ -101,20 +103,22 @@ class Combat:
         living_enemies = [e for e in self.enemies if e.alive]
         for enemy in living_enemies:
             dmg = enemy.dmg
-            f_dmg = dmg_modifier(dmg)
+            f_dmg = self.dmg_modifier(dmg)
             print(f"{enemy.name} attacks you for {dmg} damage!")
 
-            self.player.current_armor.dur -= 1
-
+            if self.player.current_armor:
+                self.player.current_armor.dur -= 1
+            self.player.take_dmg(f_dmg)
+            
             if self.player.cur_hp <= 0:
                 self.victory = False
                 print("You Died T_T")
                 return
                 
-            if self.player.current_armor == 0:
+            if self.player.current_armor.dur == 0:
                 print(f"{self.player.current_armor.name} has broken!")
                 self.player.remove_from_inventory('armors', player.current_armor)
-            self.player.take_dmg(f_dmg)
+                self.player.current_armor = None
 
     def items(self):
         #Access the player's inventory
