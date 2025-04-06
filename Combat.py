@@ -16,13 +16,13 @@ class Combat:
         for enemy in self.enemies:
             if enemy.alive:
                 print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}\n")
-        
-        if ambush == true and ambushdone == false:
+                counter += 1
+                
+        if self.ambush ==True and self.ambushdone == Talse:
             mob_attack()
-            ambushdone = True counter += 1
+            self.ambushdone = True
 
         print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}    Player MP: {self.player.mana}\n\n")
-        
         
         while True:
             u_input = input("Options:\n1) Attack\n2) Items\n3) Run\n")
@@ -89,12 +89,13 @@ class Combat:
             except ValueError:
                 print("Please enter a valid input")
     
-    def mob_attack(self): #damage dealt by the mobs 1by1 through the list of them
+    def mob_attack(self): 
+        '''damage dealt by the mobs 1by1 through the list of them'''
         living_enemies = [e for e in self.enemies if e.alive]
         for enemy in living_enemies:
-        dmg = enemy.dmg
-        print(f"{enemy.name} attacks you for {dmg} damage!")
-        self.player.take_dmg(dmg)
+            dmg = enemy.dmg
+            print(f"{enemy.name} attacks you for {dmg} damage!")
+            self.player.take_dmg(dmg)
 
         if self.player.cur_hp <= 0:
             self.victory = False
