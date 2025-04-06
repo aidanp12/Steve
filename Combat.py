@@ -9,6 +9,7 @@ class Combat:
         self.valid_inputs = ["1", "2", "3", "attack", "items", "run"]
         self.menu()
         self.victory = None
+        self.ambushdone = False
     
     def menu(self):
         counter = 1
@@ -18,7 +19,9 @@ class Combat:
                 counter += 1
 
         print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}    Player MP: {self.player.mana}\n\n")
-        
+        if ambush == true and ambushdone == false:
+            mob_attack()
+            
         while True:
             u_input = input("Options:\n1) Attack\n2) Items\n3) Run\n")
             if u_input in self.valid_inputs:
@@ -92,7 +95,6 @@ class Combat:
         self.player.take_dmg(dmg)
 
         if self.player.cur_hp <= 0:
-            print("You were defeated!")
             self.victory = False
             return
 
