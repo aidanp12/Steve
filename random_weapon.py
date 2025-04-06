@@ -1,18 +1,30 @@
-from roll import diceRoll
+import random
 
 class weaponStats:
+  def __init__(self, name, level):
+    self.name = name
+    self.dmg = 0
+    self.rarity = "owo"
+    self.dur = 0
+    self.pierce = 0
+    self.level = level
+  
   def createStats():
     stat_list = []
-    type_list = ["fire", "ice", "electricity", "void", "water", "air"]
-    rarity_list = ["common", "uncommon", "rare", "legendary", "mythic", "godlike"]
-    dmg_type = type_list[rollDice("1d6")]
-    rarity = rarity_list[rollDice("1d6")]
-    dmg = rollDice("5d4")
-    dur = rollDice("2d50")
-    pierce = rollDice("1d10")
-    stat_list.append(dmg_type)
-    stat_list.append(dmg)
-    stat_list.append(rarity)
-    stat_list.append(dur)
-    stat_list.append(pierce)
-    return stat_list
+    list1 = [1, 2]
+    sides = [4, 6, 8, 10, 12, 20]
+    tempNum = 0
+    values = [1, 2, 3]
+    for num in range(values.length()):
+      tempRand = random.randint(30, 100)
+      temp1 = random.randint(list1[random.randint[1, 2]], tempRand)
+      temp2 = random.randint(sides[random.randint[1, 6]], tempRand)
+      if num == 1:
+        dmg = (temp2 - temp1)*self.level
+      elif num == 2:
+        dur = (temp2 - temp1)*self.level
+      elif num == 3:
+        pierce = (temp2 - (2*temp1))*self.level
+    self.dmg = dmg
+    self.dur = dur
+    self.pierce = pierce
