@@ -141,3 +141,7 @@ class Combat:
     def run(self):
         run_chance = .5 #50% chance
         return random.random() < run_chance
+
+    def run(self):
+        run_chance = .5 #50% chance
+        return random.random() < run_chance
