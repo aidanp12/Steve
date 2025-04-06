@@ -3,9 +3,9 @@ from random_enemy import enemyStats
 import random
 
 class Combat:
-    def __init__(self, player, enemies):
+    def __init__(self, player, enemy):
         self.player = player
-        self.enemies = enemies
+        self.enemy = enemy
         self.valid_inputs = ["1", "2", "3", "attack", "items", "run"]
         self.victory = None
         self.ambushdone = False
@@ -14,9 +14,8 @@ class Combat:
     def menu(self):
         if self.victory == False:
             return
-        
-        if not self.ambushdone and any(mob.ambush for mob in self.enemies):
-            print("Ambush! Enemies attack first!")
+        if not self.ambushdone and self.enemy.ambush:
+            print("Ambush! Enemy attack first!")
             self.mob_attack()
             self.ambushdone = True
 
@@ -28,7 +27,7 @@ class Combat:
         print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}")
         
         while True:
-            u_input = input("Options:\n1) Attack\n2) Items\n3) Run\n")
+            u_input = input("Options:\n1) Attack\n2) Run\n")
             if u_input in self.valid_inputs:
                 self.encounter(u_input)
                 break
@@ -52,11 +51,11 @@ class Combat:
                 return
             self.menu()
 
-        elif u_input == "2" or u_input.lower() == "items":
-            self.items()
-            self.menu()
+        #elif u_input == "2" or u_input.lower() == "items":
+            #self.items()
+            #self.menu()
 
-        elif u_input == "3" or u_input.lower() == "run":
+        elif u_input == "2" or u_input.lower() == "run":
             if self.run():
                 print("Sucessfully ran!\n")
             else:
@@ -93,7 +92,7 @@ class Combat:
         '''damage dealt by the mobs one-by-one through the list of them'''
         dmg = self.enemy.dmg
         m_dmg = self.attack_modifier(dmg)
-        print(f"{enemy.name} attacks you for {m_dmg} damage!")
+        print(f"{self.enemy.name} attacks you for {m_dmg} damage!")
 
         self.player.take_dmg(m_dmg)
         print(f"You took {m_dmg} damage!\n")
@@ -106,19 +105,16 @@ class Combat:
     def items(self):
         '''Accesses the player's inventory during combat encounter'''
         while True:
-            u_input = input("\n1) Weapon\n2) Items\n3) Equip\n4) Back\n")
+            u_input = input("\n1) Weapon\n2) Equip\n3) Back\n")
 
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
 
-            elif u_input == "2" or u_input.lower() == "items":
-                print(f"{self.player.inventory['items']}\n")
-                
-            elif u_input == "3" or u_input.lower() == "equip":
+            elif u_input == "2" or u_input.lower() == "equip":
                 e_input = input('Equip: ')
                 self.player.equip_weapon(e_input.lower())
         
-            elif u_input == "4" or u_input.lower() == 'back':
+            elif u_input == "3" or u_input.lower() == 'back':
                 break
 
     def attack_modifier(self, base_dmg):
@@ -143,7 +139,5 @@ class Combat:
         return modified_dmg
     
     def run(self):
-        run_chance = .5 #50% chance
-        return random.random() < run_chance
         run_chance = .5 #50% chance
         return random.random() < run_chance
