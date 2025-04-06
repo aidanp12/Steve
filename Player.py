@@ -45,11 +45,31 @@ class Player:
             #return f"{spell} is not in the inventory."
 
     def add_to_inventory(self, item_type, item):
-        """Add items to the inventory (weapons, armors, spells)."""
+        """Add items to the inventory (weapons, armors)."""
         if item_type not in self.inventory:
             return "Invalid item type. Choose from 'weapons', 'armors', or 'spells'."
         self.inventory[item_type].append(item.lower())
-    
+
+     def remove_from_inventory(self, item_type, item):
+         """Remove items from the inventory (weapons and armors)"""
+        if item_type not in self.inventory:
+            return f"Invalid item type: {item_type}"
+        
+        try:
+            self.inventory[item_type].remove(item)
+            print(f"{item.name} has been removed from your inventory.")
+
+            if item_type == 'weapons' and self.current_weapon == item:
+                self.current_weapon = None
+                print(f"{item.name} has also been unequipped.")
+            
+            elif item_type == 'armors' and self.current_armor == item:
+                self.current_armor = None
+                print(f"{item.name} has also been unquipped.")
+                
+        except ValueError:
+            print(f"{item.name} is not in your inventory.")
+            
     def view_inventory(self):
         print("Weapons:")
         if self.inventory['weapons']:
