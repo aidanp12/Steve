@@ -3,7 +3,7 @@ from Mob import Mob
 import random
 from roll import diceRoll
 from weapon import Weapon
-from Armor import Armor
+#from Armor import Armor
 '''This line is for testing'''
 
 class Combat:
@@ -16,6 +16,9 @@ class Combat:
         self.menu()
         
     def menu(self):
+        if self.victory == False:
+            return
+        
         if not self.ambushdone and any(mob.ambush for mob in self.enemies):
             print("Ambush! Enemies attack first!")
             self.mob_attack()
@@ -24,9 +27,9 @@ class Combat:
         counter = 1
         for enemy in self.enemies:
             if enemy.alive:
-                print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}\n")
+                print(f"{counter}) {enemy.name}: {enemy.cur_hp}/{enemy.max_hp}")
                 counter += 1
-
+        print()
         print(f"Player HP: {self.player.cur_hp}/{self.player.max_hp}")
         
         while True:
@@ -113,13 +116,13 @@ class Combat:
             m_dmg = self.attack_modifier(dmg)
             print(f"{enemy.name} attacks you for {m_dmg} damage!")
 
-            if self.player.current_armor:
-                f_dmg = self.defense_modifier(m_dmg)
-            else:
-                f_dmg = m_dmg
+            #if self.player.current_armor:
+                #f_dmg = self.defense_modifier(m_dmg)
+            #else:
+                #f_dmg = m_dmg
 
-            self.player.take_dmg(f_dmg)
-            print(f"You took {f_dmg} damage!\n")
+            self.player.take_dmg(m_dmg)
+            print(f"You took {m_dmg} damage!\n")
 
             if self.player.cur_hp <= 0:
                 self.victory = False
@@ -134,8 +137,8 @@ class Combat:
             if u_input == "1" or u_input.lower() == "weapon":
                 print(f"{self.player.inventory['weapons']}\n")
 
-            elif u_input == "2" or u_input.lower() == "armor":
-                print(f"{self.player.inventory['armors']}\n")
+            #elif u_input == "2" or u_input.lower() == "armor":
+                #print(f"{self.player.inventory['armors']}\n")
 
             elif u_input == "3" or u_input.lower() == "equip":
                 e_input = input('Equip: ')
@@ -165,34 +168,34 @@ class Combat:
         modified_dmg = round(base_dmg * modifier, 2)
         return modified_dmg
     
-    def defense_modifier(self, dmg):
-        '''Reduces damage by base defense of armour + bonus reduction depending on 1d20 roll'''
-        roll = diceRoll("1d20")
-        base_defense = self.player.current_armor.defense
+    #def defense_modifier(self, dmg):
+        #'''Reduces damage by base defense of armour + bonus reduction depending on 1d20 roll'''
+        #roll = diceRoll("1d20")
+        #base_defense = self.player.current_armor.defense
 
-        if 1 < roll < 20:
-            modifier = roll *0.05
+        #if 1 < roll < 20:
+            #modifier = roll *0.05
 
-        elif roll == 20:
-            modifier = 2
-            print("Perfect block!")
-        else:
-            modifier = 0
+        #elif roll == 20:
+            #modifier = 2
+            #print("Perfect block!")
+        #else:
+            #modifier = 0
 
-        bonus_defense = base_defense * modifier
-        reduced_dmg = round(dmg - bonus_defense - base_defense, 2)
-        reduced_dmg = max(0, reduced_dmg)
+        #bonus_defense = base_defense * modifier
+        #reduced_dmg = round(dmg - bonus_defense - base_defense, 2)
+        #reduced_dmg = max(0, reduced_dmg)
 
-        absorbed = dmg - reduced_dmg
-        durability_loss = max(1, int(absorbed/5))
-        self.player.current_armor.dur -= durability_loss
+        #absorbed = dmg - reduced_dmg
+        #durability_loss = max(1, int(absorbed/5))
+        #self.player.current_armor.dur -= durability_loss
 
-        if self.player.current_armor.dur == 0:
-                print(f"{self.player.current_armor.name} has broken!")
-                self.player.remove_from_inventory('armors', self.player.current_armor)
-                self.player.current_armor = None
-        print(f"Damage was reduced by {absorbed} becuase of your armor!")
-        return(reduced_dmg)
+        #if self.player.current_armor.dur == 0:
+                #print(f"{self.player.current_armor.name} has broken!")
+                #self.player.remove_from_inventory('armors', self.player.current_armor)
+                #self.player.current_armor = None
+        #print(f"Damage was reduced by {absorbed} becuase of your armor!")
+        #return(reduced_dmg)
     
     def run(self):
         run_chance = .5 #50% chance
@@ -205,20 +208,23 @@ def main():
     # Create a weapon and armor
     sword = Weapon(dmg_type="slashing", dmg=5, rarity="common", dur=5, pierce=1)
     sword.name = "Iron Sword"  # Add name for display
-    armor = Armor(name="Leather Armor", dur=10, defense=2, rarity="common")
+    #armor = Armor(name="Leather Armor", dur=10, defense=2, rarity="common")
 
     # Add items to inventory and equip them
     player.add_to_inventory('weapons', sword.name.lower())
     player.current_weapon = sword
 
-    player.add_to_inventory('armors', armor.name.lower())
-    player.current_armor = armor
+    #player.add_to_inventory('armors', armor.name.lower())
+    #player.current_armor = armor
 
     # Create some mobs
     goblin = Mob(name="Goblin", hp=10, dmg=3, ambush=True)
     skeleton = Mob(name="Skeleton", hp=12, dmg=4, ambush=False)
 
     # Start combat
+    combat = Combat(player, [goblin, skeleton])
+
+main()
     combat = Combat(player, [goblin, skeleton])
 
 main()
