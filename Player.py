@@ -33,7 +33,7 @@ class Player:
         if (item_type == 'items'):
             self.inventory['items'].append(item_name.lower())
         else:
-            new_weapon = Weapon(item_name.lower(), WeaponStats[0], WeaponStats[1], WeaponStats[2], WeaponStats[3], WeaponStats[4], WeaponStats[5])
+            new_weapon = Weapon(item_name.lower(), weaponStats[0], weaponStats[1], weaponStats[2], weaponStats[3], weaponStats[4], weaponStats[5])
             self.inventory['weapons'].append(new_weapon)
 
      def remove_from_inventory(self, item_type, item_name):
