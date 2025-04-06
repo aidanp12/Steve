@@ -17,7 +17,7 @@ class Player:
             #print(f"{weapon_name} equipped.\n")
         #else:
             #print(f"{weapon_name} is not in the inventory.")
-
+        weapon_name = weapon_name.lower()
         for weapon in self.inventory['weapons']:
             if weapon.name.lower() == weapon_name:
                 self.current_weapon = weapon
@@ -51,9 +51,11 @@ class Player:
                 #print(f"{item_name.name} has also been unequipped.")
             #else:
                 #print(f"{item_name} not found in inventory.")
+        if not isinstance(item_name, str) and hasattr(item_name, 'name'):
+            item_name = item_name.name
+        
         item_name = item_name.lower()
         for item in self.inventory[item_type]:
-        # Check for weapon type (weaponStats object)
             if item_type == 'weapons' and hasattr(item, 'name') and item.name.lower() == item_name:
                 self.inventory[item_type].remove(item)
                 print(f"{item.name} has been removed from your inventory.")
@@ -62,7 +64,6 @@ class Player:
                     print(f"{item.name} has also been unequipped.")
                 return
 
-        # Check for regular item (string)
             elif item_type == 'items' and isinstance(item, str) and item.lower() == item_name:
                 self.inventory[item_type].remove(item)
                 print(f"{item} has been removed from your inventory.")
