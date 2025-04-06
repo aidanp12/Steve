@@ -11,7 +11,7 @@ class Player:
         # Inventory holds extra items (weapons, armors, spells)
         self.inventory = {
             'weapons': [],
-            'armors': [],
+            'armors': []
             #'spells': []
         }
 
